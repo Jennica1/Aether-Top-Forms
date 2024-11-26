@@ -16,7 +16,7 @@ connectDB();
 
 // Middleware
 const corsOptions = {
-  origin: "https://aether-top-forms-leaderboard.vercel.app",  // Remove the trailing slash
+  origin: "https://aether-top-forms-leaderboard.vercel.app/",  // Your deployed frontend URL
   methods: "GET,POST",
   credentials: true,
 };
