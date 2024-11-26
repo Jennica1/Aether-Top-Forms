@@ -13,7 +13,7 @@ const VotingForm = () => {
     }
 
     try {
-      await axios.post("https://aether-top-forms-leaderboard.onrender.com/api/votes", { formType });
+      await axios.post("https://aether-top-forms-leaderboard.onrender.com", { formType });
 
       alert("Vote submitted!");
     } catch (error) {

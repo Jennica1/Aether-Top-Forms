@@ -16,7 +16,7 @@ connectDB();
 
 // Middleware
 const corsOptions = {
-  origin: "https://aether-top-forms-leaderboard.onrender.com",  // Your deployed frontend URL
+  origin: "https://your-frontend-site.vercel.app",  // Your deployed frontend URL
   methods: "GET,POST",
   credentials: true,
 };
