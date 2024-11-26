@@ -1,11 +1,11 @@
-## Dependancy Installation Guide
+# Dependancy Installation Guide
 
-# cd form-leaderboard-frontend
+## cd form-leaderboard-frontend
 - npm install axios react react-dom
 
-# cd form-leaderboard-backend
+## cd form-leaderboard-backend
 - npm install express mongoose cors
 - npm install --save-dev nodemon
 
-## Running Backend and Frontend
+# Running Backend and Frontend
 - 'npm run dev' and 'node server.js' at the same 
