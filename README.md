@@ -8,4 +8,5 @@
 - npm install --save-dev nodemon
 
 # Running Backend and Frontend
-- 'npm run dev' and 'node server.js' at the same 
+- 'npm run dev' and 'node server.js' at the same
+- 'http://localhost:5000/api/votes/leaderboard' to see json data
