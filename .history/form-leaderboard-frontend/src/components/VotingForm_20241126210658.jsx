@@ -54,29 +54,24 @@ const VotingForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleVote}>
-      {formDescriptions.map((form) => (
-  <div key={form.formType}>
-    <label>
-      <input
-        type="radio"
-        name="form"
-        value={form.formType}
-        onChange={(e) => handleFormSelection(e.target.value)}
-      />
-      {form.formType}
-    </label>
-  </div>
-))}
-        <button type="submit">Submit Vote</button>
-      </form>
-
-      {selectedDescription && (
-        <div>
-          <h3>Form Description:</h3>
-          <p>{selectedDescription}</p>
-        </div>
-      )}
+      {console.log("Rendered formDescriptions:", formDescriptions)}
+{formDescriptions.length > 0 ? (
+  formDescriptions.map((form) => (
+    <div key={form.formType}>
+      <label>
+        <input
+          type="radio"
+          name="form"
+          value={form.formType}
+          onChange={(e) => handleFormSelection(e.target.value)}
+        />
+        {form.formType}
+      </label>
+    </div>
+  ))
+) : (
+  <p>Loading form descriptions...</p>
+)}
     </div>
   );
 };

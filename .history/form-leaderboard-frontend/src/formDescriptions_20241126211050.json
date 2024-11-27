@@ -10,6 +10,9 @@
   {
     "formType": "Death Form",
     "description": "A form for processing claims related to death benefits."
+  },
+  {
+    "formType": "Death Form",
+    "description": "A form for processing claims related to death benefits."
   }
-
 ]

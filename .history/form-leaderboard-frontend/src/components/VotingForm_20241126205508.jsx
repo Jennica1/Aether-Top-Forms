@@ -9,7 +9,6 @@ const VotingForm = () => {
   useEffect(() => {
     import("../formDescriptions.json")
       .then((module) => {
-        console.log("Loaded form descriptions:", module.default); // Debugging
         setFormDescriptions(module.default);
       })
       .catch((error) => {
@@ -55,8 +54,8 @@ const VotingForm = () => {
   return (
     <div>
       <form onSubmit={handleVote}>
-      {formDescriptions.map((form) => (
-  <div key={form.formType}>
+      {formDescriptions.map((form, index) => (
+  <div key={index}>
     <label>
       <input
         type="radio"
@@ -66,6 +65,7 @@ const VotingForm = () => {
       />
       {form.formType}
     </label>
+    <br />
   </div>
 ))}
         <button type="submit">Submit Vote</button>

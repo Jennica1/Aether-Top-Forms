@@ -3,6 +3,7 @@ import axios from "axios";
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
+  const [formDescriptions, setFormDescriptions] = useState([]);
   const [error, setError] = useState(null);
 
   const fetchLeaderboardAndDescriptions = async () => {
@@ -14,17 +15,9 @@ const Leaderboard = () => {
 
       // Fetch form descriptions from the JSON file
       const descriptionsModule = await import("../formDescriptions.json");
-      const formDescriptions = descriptionsModule.default;
 
-      // Combine leaderboard data with form descriptions
-      const combinedData = leaderboardData.map((entry) => {
-        const description = formDescriptions.find(
-          (form) => form.formType === entry._id
-        )?.description;
-        return { ...entry, description: description || "No description available." };
-      });
-
-      setLeaderboard(combinedData);
+      setLeaderboard(leaderboardData);
+      setFormDescriptions(descriptionsModule.default);
       setError(null); // Clear any previous errors
     } catch (error) {
       console.error("Error fetching leaderboard or descriptions:", error);
@@ -38,12 +31,22 @@ const Leaderboard = () => {
 
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
-      {/* Display the leaderboard with descriptions */}
+      {/* Display the leaderboard */}
       <h3>Leaderboard:</h3>
       <ul>
         {leaderboard.map((entry) => (
           <li key={entry._id}>
             <strong>{entry._id}</strong> ({entry.count} votes): {entry.description}
+          </li>
+        ))}
+      </ul>
+
+      {/* Display the form descriptions */}
+      <h3>Form Descriptions:</h3>
+      <ul>
+        {formDescriptions.map((form) => (
+          <li key={form.formType}>
+            {form.formType}: {form.description}
           </li>
         ))}
       </ul>
