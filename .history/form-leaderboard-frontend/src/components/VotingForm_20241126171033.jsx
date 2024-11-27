@@ -4,6 +4,7 @@ import axios from "axios";
 const VotingForm = () => {
   const [formType, setFormType] = useState("");
   const [description, setDescription] = useState("");
+  const [descriptions, setDescriptions] = useState({}); // Store all form descriptions
 
   // Fetch form descriptions when the component mounts
   useEffect(() => {
@@ -79,7 +80,13 @@ const VotingForm = () => {
         <button type="submit">Submit Vote</button>
       </form>
 
-      
+      {/* Show description below the button */}
+      {formType && (
+        <div style={{ marginTop: "20px" }}>
+          <h3>{formType}</h3>
+          <p>{description || "Loading description..."}</p>
+        </div>
+      )}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import axios from "axios";
 const VotingForm = () => {
   const [formType, setFormType] = useState("");
   const [description, setDescription] = useState("");
+  const [descriptions, setDescriptions] = useState({}); // Store all form descriptions
 
   // Fetch form descriptions when the component mounts
   useEffect(() => {

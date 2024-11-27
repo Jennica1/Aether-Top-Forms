@@ -5,27 +5,23 @@ const VotingForm = () => {
   const [formType, setFormType] = useState("");
   const [description, setDescription] = useState("");
 
-  // Fetch form descriptions when the component mounts
   useEffect(() => {
     const fetchDescriptions = async () => {
       try {
         const { data } = await axios.get(
           "https://aether-top-forms-leaderboard.onrender.com/api/votes/form-details"
         );
-        setDescriptions(data);
+        if (formType && data[formType]) {
+          setDescription(data[formType]);
+        } else {
+          setDescription(""); // Clear description if no form selected
+        }
       } catch (error) {
         console.error("Error fetching form descriptions:", error);
       }
     };
     fetchDescriptions();
-  }, []);
-
-  // Update the description when the formType changes
-  useEffect(() => {
-    if (formType) {
-      setDescription(descriptions[formType] || "");
-    }
-  }, [formType, descriptions]);
+  }, [formType]);
 
   const handleVote = async (e) => {
     e.preventDefault();
@@ -79,7 +75,12 @@ const VotingForm = () => {
         <button type="submit">Submit Vote</button>
       </form>
 
-      
+      {formType && (
+        <div>
+          <h3>{formType}</h3>
+          <p>{description || "Loading description..."}</p>
+        </div>
+      )}
     </div>
   );
 };

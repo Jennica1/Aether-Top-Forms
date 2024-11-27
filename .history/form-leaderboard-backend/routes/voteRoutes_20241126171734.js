@@ -12,20 +12,15 @@ const formDescriptions = {
 router.post("/", async (req, res) => {
   const { formType } = req.body;
 
-  // Validate input
   if (!formType) {
-    return res.status(400).json({ error: "Form type is required." });
+    return res.status(400).json({ message: "Form type is required" });
   }
 
   try {
-    const result = await Vote.findOneAndUpdate(
-      { _id: formType },
-      { $inc: { count: 1 } },
-      { upsert: true, new: true }
-    );
-    res.status(200).json(result);
+    const vote = await Vote.create({ formType });
+    res.status(201).json(vote);
   } catch (error) {
-    res.status(500).json({ error: "Error saving vote." });
+    res.status(500).json({ message: error.message });
   }
 });
 
