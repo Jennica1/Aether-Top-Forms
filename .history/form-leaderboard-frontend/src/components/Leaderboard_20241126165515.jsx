@@ -25,9 +25,7 @@ const Leaderboard = () => {
         {leaderboard.map((entry) => (
           <li key={entry._id}>
 
-           <h3> {entry._id}: {entry.count} votes 
-           </h3>
-           
+           <h2> {entry._id}: {entry.count} votes </h2>
           </li>
         ))}
       </ul>

@@ -27,7 +27,6 @@ const Leaderboard = () => {
 
            <h3> {entry._id}: {entry.count} votes 
            </h3>
-           
           </li>
         ))}
       </ul>
