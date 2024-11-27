@@ -6,8 +6,16 @@ const VotingForm = () => {
 
   const handleVote = async (e) => {
     e.preventDefault();
+
+    if (!formType) {
+      alert("Please select a form!");
+      return;
+    }
+
     try {
-      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/votes`, { formType });
+      // await axios.post("https://aether-top-forms-leaderboard.onrender.com/api/votes", { formType });
+      await axios.post("/api/votes", { formType });
+      
       alert("Vote submitted!");
     } catch (error) {
       console.error("Error submitting vote:", error);

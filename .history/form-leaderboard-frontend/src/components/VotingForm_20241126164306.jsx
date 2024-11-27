@@ -13,6 +13,7 @@ const VotingForm = () => {
       console.error("Error submitting vote:", error);
     }
   };
+  
 
   return (
     <form onSubmit={handleVote}>

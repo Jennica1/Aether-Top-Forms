@@ -16,14 +16,11 @@ connectDB();
 
 // Middleware
 const corsOptions = {
-  origin: [
-    "http://localhost:3000",  // Local frontend during development (React)
-    "http://localhost:5173", // Local frontend during development (Vite)
-    "https://aether-top-forms-leaderboard.vercel.app",  // Deployed frontend
-  ],
+  origin: "https://aether-top-forms-leaderboard.vercel.app",  // Your deployed frontend URL
   methods: "GET,POST",
   credentials: true,
 };
+
 app.use(cors(corsOptions));  // Apply CORS
 
 // Middleware to parse JSON requests

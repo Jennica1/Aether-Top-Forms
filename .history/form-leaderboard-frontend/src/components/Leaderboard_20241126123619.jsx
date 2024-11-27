@@ -6,11 +6,11 @@ const Leaderboard = () => {
 
   const fetchLeaderboard = async () => {
     try {
-      const { data } = await axios.get("https://aether-top-forms-leaderboard.onrender.com/api/votes/leaderboard");
+      // const { data } = await axios.get("https://aether-top-forms-leaderboard.onrender.com/api/votes/leaderboard");
       
-      // const { data } = await axios.get(
-      //   "http://localhost:5000/api/votes/leaderboard"
-      // );
+      const { data } = await axios.get(
+        "http://localhost:5000/api/votes/leaderboard"
+      );
       
       setLeaderboard(data);
     } catch (error) {
