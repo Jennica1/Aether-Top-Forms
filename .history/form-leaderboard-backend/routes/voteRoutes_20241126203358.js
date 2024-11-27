@@ -2,6 +2,12 @@ const express = require("express");
 const Vote = require("../models/Vote");
 const router = express.Router();
 
+const formDescriptions = {
+  "Disability Form": "A form for requesting accommodations or support for disabilities.",
+  "Financial Form": "A form for financial aid or assistance requests.",
+  "Death Form": "A form for processing claims related to death benefits.",
+};
+
 // Save a user vote
 router.post("/", async (req, res) => {
   const { formType } = req.body;
@@ -24,6 +30,10 @@ router.post("/", async (req, res) => {
 });
 
 // Get leaderboard (count of votes per form type)
+router.get("/form-details", (req, res) => {
+  res.json(formDescriptions);
+});
+
 router.get("/leaderboard", async (req, res) => {
   try {
     const leaderboard = await Vote.aggregate([
