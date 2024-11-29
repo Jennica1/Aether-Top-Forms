@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
+import "./Forms.css";
 
 const VotingForm = () => {
   const [formDescriptions, setFormDescriptions] = useState([]);
   const [formType, setFormType] = useState("");
   const [selectedDescription, setSelectedDescription] = useState("");
 
-  // Load form descriptions from JSON
   useEffect(() => {
     import("../formDescriptions.json")
       .then((module) => {
-        console.log("Loaded form descriptions:", module.default); // Debugging
+        console.log("Loaded form descriptions:", module.default);
         setFormDescriptions(module.default);
       })
       .catch((error) => {
@@ -17,7 +17,6 @@ const VotingForm = () => {
       });
   }, []);
 
-  // Handle form selection and display description
   const handleFormSelection = (form) => {
     setFormType(form);
     const description = formDescriptions.find((item) => item.formType === form)?.description;
@@ -54,9 +53,9 @@ const VotingForm = () => {
 
   return (
     <div>
-      <form onSubmit={handleVote}>
+      <form className="container-form" onSubmit={handleVote}>
       {formDescriptions.map((form) => (
-  <div key={form.formType}>
+  <div className="cont-label" key={form.formType}>
     <label>
       <input
         type="radio"
@@ -68,7 +67,7 @@ const VotingForm = () => {
     </label>
   </div>
 ))}
-        <button type="submit">Submit Vote</button>
+        <button className="btn-cont" type="submit">Submit Vote</button>
       </form>
 
       {selectedDescription && (
