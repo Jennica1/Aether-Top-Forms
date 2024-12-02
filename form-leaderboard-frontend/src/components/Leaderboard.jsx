@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "./Forms.css";
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -7,17 +8,21 @@ const Leaderboard = () => {
 
   const fetchLeaderboardAndDescriptions = async () => {
     try {
-      // Fetch leaderboard data from the backend
       const { data: leaderboardData } = await axios.get(
         "https://aether-top-forms-leaderboard.onrender.com/api/votes/leaderboard"
       );
 
-      // Fetch form descriptions from the JSON file
       const descriptionsModule = await import("../formDescriptions.json");
       const formDescriptions = descriptionsModule.default;
 
-      // Combine leaderboard data with form descriptions
-      const combinedData = leaderboardData.map((entry) => {
+      const uniqueLeaderboardData = leaderboardData.reduce((acc, entry) => {
+        if (!acc.some((item) => item._id === entry._id)) {
+          acc.push(entry);
+        }
+        return acc;
+      }, []);
+
+      const combinedData = uniqueLeaderboardData.map((entry) => {
         const description = formDescriptions.find(
           (form) => form.formType === entry._id
         )?.description;
@@ -25,7 +30,7 @@ const Leaderboard = () => {
       });
 
       setLeaderboard(combinedData);
-      setError(null); // Clear any previous errors
+      setError(null);
     } catch (error) {
       console.error("Error fetching leaderboard or descriptions:", error);
       setError(error.message || "Something went wrong");
@@ -33,12 +38,11 @@ const Leaderboard = () => {
   };
 
   return (
-    <div>
+    <div className="cont-leaderboard">
       <button onClick={fetchLeaderboardAndDescriptions}>View Leaderboard</button>
 
       {error && <p style={{ color: "red" }}>Error: {error}</p>}
 
-      {/* Display the leaderboard with descriptions */}
       <h3>Leaderboard:</h3>
       <ul>
         {leaderboard.map((entry) => (
